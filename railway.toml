@@ -1,0 +1,4 @@
+# railway.toml
+[statics]
+directory = "build"
+base = "/"
