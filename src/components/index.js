@@ -8,6 +8,7 @@ import VehicleCard from './VehicleCard'
 import ServiceForm from './ServiceForm'
 import ServiceCard from './ServiceCard'
 import RepairForm from './RepairForm'
+import RepairCard from './RepairCard'
 
 export{
     MenuItem,
@@ -20,4 +21,5 @@ export{
     ServiceForm,
     ServiceCard,
     RepairForm,
+    RepairCard,
 }

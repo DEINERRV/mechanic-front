@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { vehicleGetById } from '../../store'
+import { vehicleGetById, repiartGetAll } from '../../store'
 import { toast } from 'react-toastify'
-import { UserCard } from '../../components'
+import { UserCard, RepairCard } from '../../components'
 import { Link } from 'react-router-dom'
 
 function Show() {
@@ -10,6 +10,7 @@ function Show() {
   const loading = useSelector((state) => state.vehicles.isLoading)
   const error = useSelector((state) => state.vehicles.error)
   const vehicle = useSelector((state) => state.vehicles.vehicle)
+  const repairs = useSelector((state) => state.repairs.repairs)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,6 +21,7 @@ function Show() {
 
     //Dispatch get by id
     dispatch(vehicleGetById({ token: authToken, vehicleId: vehicle_id }))
+    dispatch(repiartGetAll({ token: authToken, filter: vehicle_id }))
   }, [])
 
   return (
@@ -58,7 +60,9 @@ function Show() {
         </Link>
 
         <div className='mt-2 flex flex-col gap-5'>
-          <UserCard {...vehicle.owner} />
+          {repairs.map((repair, index) =>
+            <RepairCard key={index} {...repair} />
+          )}
         </div>
       </div>
 
