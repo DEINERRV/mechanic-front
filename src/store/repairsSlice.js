@@ -6,7 +6,8 @@ import {
   repairCreate,
   repairDelete,
   repairGetById,
-  repairUpdate
+  repairUpdate,
+  repiarGetAll
 } from '../api'
 
 
@@ -89,7 +90,23 @@ const repairsSlice = createSlice({
       .addCase(elim.rejected, (state, action) => {
         state.isLoading = false
         state.error = action.payload
-      });;
+      })
+      // Get All
+      .addCase(getAll.pending, (state) => {
+        state.isLoading = true
+        state.error = null
+        state.repairs = []
+      })
+      .addCase(getAll.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.error = null
+        state.repairs = action.payload.repairs
+      })
+      .addCase(getAll.rejected, (state, action) => {
+        state.isLoading = false
+        state.error = action.payload
+        state.repairs = []
+      });
   },
 });
 
@@ -186,6 +203,29 @@ export const elim = createAsyncThunk(
       }
 
       // Return the response body as the payload
+      return await response.json()
+
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
+// getAll thunk action
+export const getAll = createAsyncThunk(
+  'repairs/getAll',
+  async (obj, { rejectWithValue }) => {
+    try {
+      // Make a getAll request to the server
+      const response = await repiarGetAll(obj.filter,obj.token)
+
+      // Check if the request was successful
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'request failed')
+      }
+
+      // Return the user retorned by the server as payload
       return await response.json()
 
     } catch (error) {

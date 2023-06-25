@@ -23,7 +23,8 @@ import {
     create as repairCreate,
     eliminate as repairDelete,
     getById as repairGetById,
-    update as repairUpdate
+    update as repairUpdate,
+    getAll as repiarGetAll,
 } from './repair.js'
 
 import {
@@ -53,6 +54,7 @@ export{
     repairDelete,
     repairGetById,
     repairUpdate,
+    repiarGetAll,
     //User
     userGetById,
     userGetAll,

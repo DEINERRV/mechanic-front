@@ -22,6 +22,7 @@ import {
     elim as repairDelete,
     getById as repairGetById,
     update as repairUpdate,
+    getAll as repiartGetAll
 } from './repairsSlice'
 
 import {
@@ -54,6 +55,7 @@ export{
     repairDelete,
     repairGetById,
     repairUpdate,
+    repiartGetAll,
     //User
     userCreate,
     userGetAll,

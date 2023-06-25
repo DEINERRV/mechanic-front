@@ -45,3 +45,14 @@ export const getById = async(repairId,token)=>{
 
     return await fetch(request)
 }
+
+export const getAll = async(filter, token)=>{
+    const request = new Request(
+        `${url}/repairs?=vehicle${filter}`,
+        {
+            method: 'GET', headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`}
+        }
+    )
+
+    return await fetch(request)
+}
