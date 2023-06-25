@@ -6,8 +6,9 @@ import { RepairForm } from '../../../components'
 
 function Add() {
     const authToken = useSelector((state) => state.auth.token)
-    const loading = useSelector((state) => state.services.isLoading)
-    const error = useSelector((state) => state.services.error)
+    const userLogged = useSelector((state) => state.auth.user)
+    const loading = useSelector((state) => state.repairs.isLoading)
+    const error = useSelector((state) => state.repairs.error)
     const vehicle = useSelector((state) => state.vehicles.vehicle)
     const dispatch = useDispatch()
 
@@ -16,7 +17,8 @@ function Add() {
         vehicle: vehicle,
         services: [],
         mechanic: "",
-        createdBy: "",
+        createdBy: userLogged,
+        date: Date()
     })
 
     const toastTrigger = useRef(false)
@@ -24,7 +26,6 @@ function Add() {
     const create = (event) => {
         event.preventDefault()
         dispatch(repairCreate({ token: authToken, repair }))
-
         toastTrigger.current = true
     }
 
@@ -61,10 +62,9 @@ function Add() {
                 progress: undefined,
                 theme: "light",
             })
+
             if(!error)
-                setRepair({
-                    description: "",
-                })
+                window.location.href = `/vehicles/view?vehicle_id=${vehicle._id}`
         }
     }, [loading])
 
