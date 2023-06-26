@@ -11,7 +11,7 @@ function Update() {
     const repairFromStore = useSelector((state) => state.repairs.repair)
     const dispatch = useDispatch()
 
-    const [repair, setRepair] = useState(repairFromStore)
+    const [repair, setRepair] = useState({...repairFromStore})
     const toastTrigger = useRef(false)
     
     const update = (event) => {

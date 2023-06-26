@@ -37,6 +37,12 @@ function RepairForm({ handleSubmit, repair, handleChange }) {
     useEffect(() => {
         dispatch(serviceGetAll({ token: authToken, filter: { name: "", value: "" } }))
         dispatch(userGetAll({ token: authToken, filter: { name: "role", value: "mechanic" } }))
+        repair.services.forEach(e=>{
+            setservices(services.filter(function(obj) {
+                console.log(obj)
+                return obj._id !== e._id;
+            }))
+        })
     }, [])
 
     //Observe when the request is finish(loading=null) to show or not a toast

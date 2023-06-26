@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { repairGetById } from '../../../store'
+import { repairGetById, serviceGetAll } from '../../../store'
 import { toast } from 'react-toastify'
 import { UserCard, VehicleCard } from '../../../components'
 import { Link } from 'react-router-dom'
@@ -20,6 +20,7 @@ function Show() {
 
     //Dispatch get by id
     dispatch(repairGetById({ token: authToken, repairId: repair_id }))
+    dispatch(serviceGetAll({ token: authToken}))
   }, [])
 
   return (

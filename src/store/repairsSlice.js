@@ -52,7 +52,7 @@ const repairsSlice = createSlice({
           if (repair._id === action.payload._id) {
             return action.payload
           }
-          return e
+          return repair
         })
       })
       .addCase(update.rejected, (state, action) => {
